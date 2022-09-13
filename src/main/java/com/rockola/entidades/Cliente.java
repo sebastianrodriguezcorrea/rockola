@@ -11,7 +11,6 @@ public class Cliente {
     
     @Id
     @Column(name="numdocumento", length=11, nullable=false, unique=true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int numdocumento;
     
     @Column(name="tipodocumento", length=45, nullable=false, unique=false)
