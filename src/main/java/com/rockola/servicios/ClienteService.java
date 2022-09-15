@@ -28,7 +28,7 @@ public class ClienteService {
     }
 
     public Cliente consultarCliente(int documento) {
-        Cliente c = repo.findById(documento).get();
+        Cliente c = repo.findById(documento).orElse(null);
         return c;
     }
 
