@@ -11,7 +11,6 @@ public class Compositor {
     
     @Id
     @Column(name="nombre", length=100, nullable=false, unique=true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String nombre;
     
     @Column(name="fechanacimiento", length=45, nullable=false, unique=false)
