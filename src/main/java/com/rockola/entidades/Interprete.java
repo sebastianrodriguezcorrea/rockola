@@ -6,18 +6,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name="interprete")
+@Entity(name = "interprete")
 public class Interprete {
-    
+
     @Id
-    @Column(name="nombre", length=100, nullable=false, unique=true)
+    @Column(name = "id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "nombre", length = 100, nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String nombre;
-    
-    @Column(name="fechanacimiento", length=45, nullable=false, unique=false)
+
+    @Column(name = "fechanacimiento", length = 45, nullable = false, unique = false)
     private String fechanacimiento;
 
     public Interprete() {
+    }
+
+    public Interprete(int id, String nombre, String fechanacimiento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechanacimiento = fechanacimiento;
     }
 
     public Interprete(String nombre, String fechanacimiento) {
@@ -25,8 +35,12 @@ public class Interprete {
         this.fechanacimiento = fechanacimiento;
     }
 
-    public Interprete(String fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -44,5 +58,5 @@ public class Interprete {
     public void setFechanacimiento(String fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
-    
+
 }

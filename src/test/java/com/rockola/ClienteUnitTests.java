@@ -19,7 +19,7 @@ class ClienteUnitTests {
     @Test
     @Disabled("Registro ya creado")
     void verificarSiSeGuardaUnClienteNuevo() {
-        Cliente c = new Cliente(345632, "Cédula de ciudadanía", "Fabian", "Correa", 34, "fabian@gmail.com");
+        Cliente c = new Cliente(32342, "Cédula de ciudadanía", "Fabian", "Correa", 34, "fabian@gmail.com");
 //            Cliente guardado = servicio.crearNuevoCliente(c);
 //            Assertions.assertTrue(guardado != null, "Error. No se ha guardado un nuevo cliente");
         Assertions.assertDoesNotThrow(() -> {
@@ -59,8 +59,8 @@ class ClienteUnitTests {
 
     @Test
     @Disabled("Se cargó el cliente existente con un num de documento")
-    void VerificarSiSeCargaUnClienteExistentePorNumDocumento() {
-        Cliente c = servicio.consultarCliente(345632);
+    void VerificarSiSeCargaUnClienteExistentePorId() {
+        Cliente c = servicio.consultarCliente(1);
         Assertions.assertNotNull(c, "No se cargó el cliente existente");
     }
 
@@ -73,7 +73,7 @@ class ClienteUnitTests {
 
     @Test
     @Disabled("No se cargó un cliente inexistente por num de documento")
-    void verificarSiNoSeCargaUnClienteInexistentePorNumDocumento() {
+    void verificarSiNoSeCargaUnClienteInexistentePorId() {
         Cliente c = servicio.consultarCliente(4444444);
         Assertions.assertNull(c, "Se cargó cliente inexistente");
     }
@@ -81,9 +81,9 @@ class ClienteUnitTests {
     @Test
     @Disabled("Se eliminó un cliente existente")
     void verificarSiSeEliminaUnRegistroDeUnClienteExistente() {
-        Cliente c = servicio.consultarCliente(1234523);
+        Cliente c = servicio.consultarCliente(3);
         servicio.eliminarCliente(c);
-        Cliente eliminado = servicio.consultarCliente(1234523);
+        Cliente eliminado = servicio.consultarCliente(3);
         Assertions.assertNull(eliminado, "No se eliminó el cliente existente");
     }
 
@@ -94,5 +94,19 @@ class ClienteUnitTests {
         servicio.eliminarCliente(c);
         Cliente eliminado = servicio.consultarCliente(3232342);
         Assertions.assertNull(eliminado, "Se eliminó un cliente inexistente");
+    }
+    
+    @Test
+    @Disabled("Se cargó el registro del cliente existente por num de documento")
+    void verificarSiSeCargaUnClienteExistentePorNumDocumento(){
+        Cliente c = servicio.consultarClientePorNumDocumento(32342);
+        Assertions.assertNotNull(c, "No se cargó el cliente existente");
+    }
+    
+    @Test
+    @Disabled("No se cargó un registro de un cliente inexistente por num de documento")
+    void verificarSiNoSeCargaUnClienteInexistentePorNumDocumento(){
+        Cliente c = servicio.consultarCliente(1232232);
+        Assertions.assertNull(c, "Se cargó un cliente inexistente por num de documento");
     }
 }

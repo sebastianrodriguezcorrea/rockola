@@ -9,33 +9,33 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name="cancion")
+@Entity(name = "cancion")
 public class Cancion {
-    
+
     @Id
-    @Column(name="id")
+    @Column(name = "id", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @Column(name="nombre", length=100, nullable=false, unique=false)
+
+    @Column(name = "nombre", length = 100, nullable = false, unique = false)
     private String nombre;
-    
-    @Column(name="aniopublicacion", nullable=false, unique=false)
+
+    @Column(name = "aniopublicacion", nullable = false, unique = false)
     private int anioPublicacion;
-    
-    @Column(name="duracion", length=45, nullable=false, unique=false)
+
+    @Column(name = "duracion", length = 45, nullable = false, unique = false)
     private String duracion;
-    
+
     @ManyToOne
-    @JoinColumn(name="genero")
+    @JoinColumn(name = "genero")
     private GeneroMusical genero;
-    
+
     @ManyToOne
-    @JoinColumn(name="interprete")
+    @JoinColumn(name = "interprete")
     private Interprete interprete;
-    
+
     @ManyToOne
-    @JoinColumn(name="compositor")
+    @JoinColumn(name = "compositor")
     private Compositor compositor;
 
     public Cancion() {
@@ -115,7 +115,5 @@ public class Cancion {
     public void setCompositor(Compositor compositor) {
         this.compositor = compositor;
     }
-    
-    
-    
+
 }

@@ -6,21 +6,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name="generomusical")
+@Entity(name = "generomusical")
 public class GeneroMusical {
-    
+
     @Id
-    @Column(name="nombre", length=45, nullable=false, unique=true)
+    @Column(name = "id", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "nombre", length = 45, nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String nombre;
-    
-    @Column(name="carpeta", length=45, nullable=false, unique=true)
+
+    @Column(name = "carpeta", length = 45, nullable = false, unique = true)
     private String carpeta;
-    
-    @Column(name="estado", columnDefinition = "TINYINT", nullable=false)
+
+    @Column(name = "estado", columnDefinition = "TINYINT", nullable = false)
     private Boolean estado;
 
     public GeneroMusical() {
+    }
+
+    public GeneroMusical(int id, String nombre, String carpeta, Boolean estado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.carpeta = carpeta;
+        this.estado = estado;
     }
 
     public GeneroMusical(String nombre, String carpeta, Boolean estado) {
@@ -29,9 +40,12 @@ public class GeneroMusical {
         this.estado = estado;
     }
 
-    public GeneroMusical(String carpeta, Boolean estado) {
-        this.carpeta = carpeta;
-        this.estado = estado;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -57,6 +71,5 @@ public class GeneroMusical {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
-    
-    
+
 }

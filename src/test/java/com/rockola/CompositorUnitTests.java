@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.orm.jpa.JpaSystemException;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @SpringBootTest
 public class CompositorUnitTests {
@@ -38,10 +38,10 @@ public class CompositorUnitTests {
     }
 
     @Test
-    @Disabled("No se guardó el registro invalido")
+    @Disabled("No se guarda un compositor invalido")
     void verificarSiNoSeGuardaUnCompositorInvalido() {
         Compositor comp = new Compositor(null, null);
-        Assertions.assertThrows(JpaSystemException.class, () -> {
+        Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
             servicio.crearNuevoCompositor(comp);
         }, "No se generó excepción desde la base de datos");
     }
@@ -55,8 +55,8 @@ public class CompositorUnitTests {
 
     @Test
     @Disabled("Se cargó el compositor existente con un nombre")
-    void verificarSiSeCargaUnCompositorExistentePorNombre() {
-        Compositor comp = servicio.consultarCompositor("Juanito");
+    void verificarSiSeCargaUnCompositorExistentePorId() {
+        Compositor comp = servicio.consultarCompositor(1);
         Assertions.assertNotNull(comp, "No se cargo el compositor existente");
     }
 
@@ -69,17 +69,17 @@ public class CompositorUnitTests {
 
     @Test
     @Disabled("No se cargó un compositor inexistente por nombre")
-    void verificarSiNoSeCargaUnCompositorInexistentePorNombre() {
-        Compositor comp = servicio.consultarCompositor("Lola");
+    void verificarSiNoSeCargaUnCompositorInexistentePorId() {
+        Compositor comp = servicio.consultarCompositor(12);
         Assertions.assertNull(comp, "Se cargó compositor inexistente");
     }
 
     @Test
     @Disabled("Se eliminó un compositor existente")
     void verificarSiSeEliminaUnRegistroDeUnCompositorExistente() {
-        Compositor comp = servicio.consultarCompositor("Pepito");
+        Compositor comp = servicio.consultarCompositor(3);
         servicio.eliminarCompositor(comp);
-        Compositor eliminado = servicio.consultarCompositor("Pepito");
+        Compositor eliminado = servicio.consultarCompositor(3);
         Assertions.assertNull(eliminado, "No se eliminó el cliente existente");
     }
 
@@ -88,7 +88,7 @@ public class CompositorUnitTests {
     void verificarSiNoSeEliminaUnRegistroDeUnCompositorInexistente() {
         Compositor comp = new Compositor("Fabricio", null);
         servicio.eliminarCompositor(comp);
-        Compositor eliminado = servicio.consultarCompositor("Fabricio");
-        Assertions.assertNull(eliminado, "Se eliminó un compositor inexistente");
+        List<Compositor> lista = servicio.consultarCompositorPorNombreOFecha("Fabricio");
+        Assertions.assertTrue(lista.isEmpty(), "Se eliminó un compositor inexistente");
     }
 }
