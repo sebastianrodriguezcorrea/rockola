@@ -27,16 +27,17 @@ CREATE TABLE `cancion` (
   `nombre` varchar(100) NOT NULL,
   `aniopublicacion` int(11) NOT NULL,
   `duracion` varchar(45) NOT NULL,
-  `genero` varchar(45) NOT NULL,
-  `interprete` varchar(100) NOT NULL,
-  `compositor` varchar(100) NOT NULL,
+  `genero` int(11) NOT NULL,
+  `interprete` int(11) NOT NULL,
+  `compositor` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_cancion_genero_musical_idx` (`genero`),
   KEY `fk_cancion_interprete_idx` (`interprete`),
   KEY `fk_cancion_compositor_idx` (`compositor`),
-  CONSTRAINT `fk_cancion_compositor1` FOREIGN KEY (`compositor`) REFERENCES `compositor` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cancion_genero_musical1` FOREIGN KEY (`genero`) REFERENCES `generomusical` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cancion_interprete1` FOREIGN KEY (`interprete`) REFERENCES `interprete` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_cancion_compositor1` FOREIGN KEY (`compositor`) REFERENCES `compositor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cancion_genero_musical1` FOREIGN KEY (`genero`) REFERENCES `generomusical` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cancion_interprete1` FOREIGN KEY (`interprete`) REFERENCES `interprete` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,15 +58,17 @@ DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cliente` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `numdocumento` int(11) NOT NULL,
   `tipodocumento` varchar(45) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
   `edad` int(2) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  PRIMARY KEY (`numdocumento`),
-  UNIQUE KEY `num_documento_UNIQUE` (`numdocumento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `num_documento_UNIQUE` (`numdocumento`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +77,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1234523,'Cédula de ciudadanía','Juan','Correa',23,'juan@gmail.com'),(12324522,'Cédula de ciudadanía','Juan Sebastian','Rodriguez Correa',23,'juan22@gmail.com');
+INSERT INTO `cliente` VALUES (1,32342,'Cédula de ciudadanía','Fabian','Correa',34,'fabian@gmail.com');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,11 +89,13 @@ DROP TABLE IF EXISTS `compositor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `compositor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `fechanacimiento` varchar(45) NOT NULL,
-  PRIMARY KEY (`nombre`),
-  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre_UNIQUE` (`nombre`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,6 +104,7 @@ CREATE TABLE `compositor` (
 
 LOCK TABLES `compositor` WRITE;
 /*!40000 ALTER TABLE `compositor` DISABLE KEYS */;
+INSERT INTO `compositor` VALUES (1,'Juanito','22-03-1987');
 /*!40000 ALTER TABLE `compositor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,8 +122,9 @@ CREATE TABLE `cuenta` (
   `estado` tinyint(4) NOT NULL,
   `cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_cuenta_cliente_idx` (`cliente`),
-  CONSTRAINT `fk_cuenta_cliente1` FOREIGN KEY (`cliente`) REFERENCES `cliente` (`numdocumento`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_cuenta_cliente1` FOREIGN KEY (`cliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -139,12 +146,12 @@ DROP TABLE IF EXISTS `cuentahasrol`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cuentahasrol` (
   `cuentaid` int(11) NOT NULL,
-  `rolnombre` varchar(45) NOT NULL,
-  PRIMARY KEY (`cuentaid`,`rolnombre`),
-  KEY `fk_cuenta_has_rol_rol_idx` (`rolnombre`),
+  `rolid` int(11) NOT NULL,
+  PRIMARY KEY (`cuentaid`,`rolid`),
+  KEY `fk_cuenta_has_rol_rol_idx` (`rolid`),
   KEY `fk_cuenta_has_rol_cuenta_idx` (`cuentaid`),
   CONSTRAINT `fk_cuenta_has_rol_cuenta1` FOREIGN KEY (`cuentaid`) REFERENCES `cuenta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cuenta_has_rol_rol1` FOREIGN KEY (`rolnombre`) REFERENCES `rol` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_cuenta_has_rol_rol1` FOREIGN KEY (`rolid`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -165,12 +172,14 @@ DROP TABLE IF EXISTS `generomusical`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `generomusical` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `carpeta` varchar(45) NOT NULL,
   `estado` tinyint(4) NOT NULL,
-  PRIMARY KEY (`nombre`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `carpeta_UNIQUE` (`carpeta`),
-  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
+  UNIQUE KEY `nombre_UNIQUE` (`nombre`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -191,10 +200,12 @@ DROP TABLE IF EXISTS `interprete`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `interprete` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `fechanacimiento` varchar(45) NOT NULL,
-  PRIMARY KEY (`nombre`),
-  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre_UNIQUE` (`nombre`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -221,6 +232,7 @@ CREATE TABLE `playlist` (
   `numcanciones` bigint(20) NOT NULL,
   `cuenta` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_playlist_cuenta_idx` (`cuenta`),
   CONSTRAINT `fk_playlist_cuenta1` FOREIGN KEY (`cuenta`) REFERENCES `cuenta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -270,10 +282,12 @@ DROP TABLE IF EXISTS `rol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rol` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(150) NOT NULL,
-  PRIMARY KEY (`nombre`),
-  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre_UNIQUE` (`nombre`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -295,4 +309,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-13 17:43:17
+-- Dump completed on 2022-09-15 22:45:42
