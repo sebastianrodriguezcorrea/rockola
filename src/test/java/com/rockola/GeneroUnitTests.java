@@ -17,7 +17,7 @@ public class GeneroUnitTests {
     private GeneroService servicio;
     
     @Test
-    
+    @Disabled
     void verificarSiSeGuardaUnGeneroNuevo() {
         GeneroMusical g = new GeneroMusical("Rock en español", "rock", true);
         Assertions.assertDoesNotThrow(() -> {
