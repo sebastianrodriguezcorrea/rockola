@@ -1,0 +1,16 @@
+body{
+    font-family: "Open Sans", sans-serif;
+    color: #272829;
+    margin: 0;
+    background: url(/imagenes/FondoInicio.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+h2.center{
+    text-align: center;
+}
