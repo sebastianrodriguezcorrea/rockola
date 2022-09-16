@@ -27,8 +27,8 @@ public class CompositorService {
         return lista;
     }
 
-    public Compositor consultarCompositor(String nombre) {
-        Compositor comp = repo.findById(nombre).orElse(null);
+    public Compositor consultarCompositor(int id) {
+        Compositor comp = repo.findById(id).orElse(null);
         return comp;
     }
 

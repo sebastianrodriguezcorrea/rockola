@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface IClienteRepository extends JpaRepository<Cliente, Integer> {
     
     public List<Cliente> findByNombreContainingOrApellidoContaining(String criterio, String criterio2);
+    public Cliente findByNumdocumento(Integer criterio);
     
 }

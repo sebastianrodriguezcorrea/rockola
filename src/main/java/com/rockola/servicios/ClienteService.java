@@ -27,14 +27,19 @@ public class ClienteService {
         return lista;
     }
 
-    public Cliente consultarCliente(int documento) {
-        Cliente c = repo.findById(documento).orElse(null);
+    public Cliente consultarCliente(int id) {
+        Cliente c = repo.findById(id).orElse(null);
         return c;
     }
 
     public List<Cliente> consultarCliente(String criterio) {
         List<Cliente> lista = repo.findByNombreContainingOrApellidoContaining(criterio, criterio);
         return lista;
+    }
+    
+    public Cliente consultarClientePorNumDocumento(int documento){
+        Cliente c = repo.findByNumdocumento(documento);
+        return c;
     }
 
     public void eliminarCliente(Cliente c) {

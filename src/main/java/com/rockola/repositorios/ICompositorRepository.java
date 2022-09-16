@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ICompositorRepository extends JpaRepository<Compositor, String>{
+public interface ICompositorRepository extends JpaRepository<Compositor, Integer>{
     
     public List<Compositor> findByNombreContainingOrFechanacimientoContaining(String criterio, String criterio2);
     
