@@ -73,11 +73,22 @@ public class GeneroUnitTests {
     
     @Test
     @Disabled
+    void verificarSiSeEliminaUnGenero() {
+        GeneroMusical g = new GeneroMusical("AAAAA", "AAAAA", true);
+        GeneroMusical guardado = servicio.crearNuevoGenero(g);
+        Assertions.assertTrue(guardado.getId() > 0, "No se pudo crear genero para borrar");
+        servicio.eliminarGenero(guardado);
+        GeneroMusical eliminado = servicio.consultarGeneros(guardado.getId());
+        Assertions.assertNull(eliminado, "No se eliminó el genero creado");
+    }
+    
+    @Test
+    @Disabled
     void verificarSiSeEliminaUnRegistroDeUnGeneroExistente() {
         GeneroMusical g = servicio.consultarGeneros(2);
         servicio.eliminarGenero(g);
         GeneroMusical eliminado = servicio.consultarGeneros(2);
-        Assertions.assertNull(eliminado, "No se eliminó el cliente existente");
+        Assertions.assertNull(eliminado, "No se eliminó el genero existente");
     }
 
 }
