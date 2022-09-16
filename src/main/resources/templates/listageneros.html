@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:tn="http://www.thymeleaf.org">
+    <head>
+        <title>La Rockola.com - Géneros</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    </head>
+    <body>
+        //Barra
+
+        <div class="container">
+            <<h2>Lista de géneros</h2>
+            <form action="/generos" method="get">
+                <label for="criterio">Buscar por:</label>
+                <input type="text" th:value="${criterio}" id="criterio" name="criterio">
+                <input type="submit" value="Buscar">
+            </form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Carpeta</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${not #lists.isEmpty(generos)}" th:each="genero : ${generos}">
+                        <th scope="row" th:text="${genero.id}">...</th>
+                        <td th:text="${genero.nombre}">...</td>
+                        <td th:text="${genero.carpeta}">...</td>
+                        <td th:text="${genero.estado}">...</td>
+                    </tr>
+                    <tr th:unless="${#lists.isEmpty(generos)}">
+                        <td colspan="4">No se encontraron registros</td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    </body>
+</html>
