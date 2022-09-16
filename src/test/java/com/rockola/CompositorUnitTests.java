@@ -54,7 +54,7 @@ public class CompositorUnitTests {
     }
 
     @Test
-    @Disabled("Se cargó el compositor existente con un nombre")
+    @Disabled("Se cargó el compositor existente con un id")
     void verificarSiSeCargaUnCompositorExistentePorId() {
         Compositor comp = servicio.consultarCompositor(1);
         Assertions.assertNotNull(comp, "No se cargo el compositor existente");
@@ -68,7 +68,7 @@ public class CompositorUnitTests {
     }
 
     @Test
-    @Disabled("No se cargó un compositor inexistente por nombre")
+    @Disabled("No se cargó un compositor inexistente por id")
     void verificarSiNoSeCargaUnCompositorInexistentePorId() {
         Compositor comp = servicio.consultarCompositor(12);
         Assertions.assertNull(comp, "Se cargó compositor inexistente");
@@ -80,7 +80,7 @@ public class CompositorUnitTests {
         Compositor comp = servicio.consultarCompositor(3);
         servicio.eliminarCompositor(comp);
         Compositor eliminado = servicio.consultarCompositor(3);
-        Assertions.assertNull(eliminado, "No se eliminó el cliente existente");
+        Assertions.assertNull(eliminado, "No se eliminó el compositor existente");
     }
 
     @Test
