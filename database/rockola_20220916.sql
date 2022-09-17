@@ -68,7 +68,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `num_documento_UNIQUE` (`numdocumento`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `compositor` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre_UNIQUE` (`nombre`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,9 +145,11 @@ DROP TABLE IF EXISTS `cuentahasrol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cuentahasrol` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cuentaid` int(11) NOT NULL,
   `rolid` int(11) NOT NULL,
-  PRIMARY KEY (`cuentaid`,`rolid`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_cuenta_has_rol_rol_idx` (`rolid`),
   KEY `fk_cuenta_has_rol_cuenta_idx` (`cuentaid`),
   CONSTRAINT `fk_cuenta_has_rol_cuenta1` FOREIGN KEY (`cuentaid`) REFERENCES `cuenta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -206,7 +208,7 @@ CREATE TABLE `interprete` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre_UNIQUE` (`nombre`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,6 +217,7 @@ CREATE TABLE `interprete` (
 
 LOCK TABLES `interprete` WRITE;
 /*!40000 ALTER TABLE `interprete` DISABLE KEYS */;
+INSERT INTO `interprete` VALUES (1,'Pascal','22-03-1987');
 /*!40000 ALTER TABLE `interprete` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,9 +258,11 @@ DROP TABLE IF EXISTS `playlisthascancion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `playlisthascancion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `playlistid` int(11) NOT NULL,
   `cancionid` int(11) NOT NULL,
-  PRIMARY KEY (`playlistid`,`cancionid`),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_playlist_has_cancion_cancion_idx` (`cancionid`),
   KEY `fk_playlist_has_cancion_playlist_idx` (`playlistid`),
   CONSTRAINT `fk_playlist_has_cancion_cancion1` FOREIGN KEY (`cancionid`) REFERENCES `cancion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -309,4 +314,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-15 22:45:42
+-- Dump completed on 2022-09-16 17:28:42
