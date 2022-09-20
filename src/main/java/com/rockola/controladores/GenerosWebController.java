@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class GenerosWebController {
     
     @Autowired
-    private GeneroService servicio;
+    private GeneroService generoService;
     
-    @GetMapping("/api/generos/")
+    @GetMapping("/api/generos")
     public ResponseEntity<List<GeneroMusical>> consultarGeneros(){
-        List<GeneroMusical> lista = servicio.consultarGeneros();
+        List<GeneroMusical> lista = generoService.consultarGeneros();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 }
