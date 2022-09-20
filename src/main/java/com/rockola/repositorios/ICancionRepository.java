@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ICancionRepository extends JpaRepository<Cancion, Integer>{
-    public List<Cancion>findByNombreContaining(String criterio);
+    public List<Cancion>findByNombreContainingOrGeneroNombreContainingOrCompositorNombreContainingOrInterpreteNombreContaining(String c1, String c2, String c3, String c4);
 }

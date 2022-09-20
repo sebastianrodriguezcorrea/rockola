@@ -17,7 +17,7 @@ public class CancionService {
     }
     
     public List<Cancion> cargarCancionesPorCriterio(String criterio){
-        return cancionRepo.findByNombreContaining(criterio);
+        return cancionRepo.findByNombreContainingOrGeneroNombreContainingOrCompositorNombreContainingOrInterpreteNombreContaining(criterio, criterio, criterio, criterio);
     }
     
     public Cancion cargarCancion(int id){

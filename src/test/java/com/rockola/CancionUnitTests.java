@@ -92,6 +92,12 @@ public class CancionUnitTests {
     void verificarSiSeCargaCancionesPorCriterio() {
         List<Cancion> cancionesPorNombre = cancionService.cargarCancionesPorCriterio("amor");
         Assertions.assertTrue(cancionesPorNombre.size() > 0, "Error al cargar canciones por nombre");
+        List<Cancion> cancionesPorGenero = cancionService.cargarCancionesPorCriterio("vallenato");
+        Assertions.assertTrue(cancionesPorGenero.size() > 0, "Error al cargar canciones por nombre");
+        List<Cancion> cancionesPorInterprete = cancionService.cargarCancionesPorCriterio("Binomio");
+        Assertions.assertTrue(cancionesPorInterprete.size() > 0, "Error al cargar canciones por nombre");
+        List<Cancion> cancionesPorCompositor = cancionService.cargarCancionesPorCriterio("Ivan");
+        Assertions.assertTrue(cancionesPorCompositor.size() > 0, "Error al cargar canciones por nombre");
     }
     
     @Test
