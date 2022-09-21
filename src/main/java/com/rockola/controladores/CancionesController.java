@@ -47,13 +47,13 @@ public class CancionesController {
     @PostMapping("/canciones")
     public String guardarCancion(@ModelAttribute Cancion g){
         cancionService.guardarCancion(g);
-        return "redirect:/cancion";
+        return "redirect:/canciones";
     }
     
     @GetMapping("/canciones/eliminar/{id}")
     public String eliminarCancion(@PathVariable int id) {
         Cancion g = cancionService.cargarCancion(id);
         cancionService.eliminarCancion(g);
-        return "redirect:/generos";
+        return "redirect:/canciones";
     }
 }
