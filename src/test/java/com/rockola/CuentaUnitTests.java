@@ -40,7 +40,7 @@ public class CuentaUnitTests {
     }
 
     @Test
-    @Disabled("No se ha guardado un registro de cliente invalido")
+    @Disabled("No se ha guardado un registro de cuenta invalida")
     void verificarSiNoSeGuardaUnaCuentaInvalida() {
         Cliente cliente = servicioCliente.consultarCliente(1);
         List<Rol> listaRol = servicioRol.consultarRolPorNombreODescripcion("normal");
