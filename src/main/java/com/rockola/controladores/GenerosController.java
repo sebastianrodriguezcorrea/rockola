@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * index.html                /
+ * inicio.html                /
  * listageneros.html         /generos
  * formgeneros.html          /generos/form/{id}
  *
@@ -25,7 +25,7 @@ public class GenerosController {
 
     @GetMapping("/")
     public String cargarIndex() {
-        return "index";
+        return "inicio";
     }
     
     @GetMapping("/generos")
