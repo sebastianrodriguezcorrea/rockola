@@ -9,7 +9,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="g">La Rockola</a>
+                    <a class="navbar-brand" href="">La Rockola</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -19,16 +19,13 @@
                                 <a class="nav-link" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled">Lista de canciones</a>
+                                <a class="nav-link" href="/canciones">Canciones</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link disabled">Mis playlists</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/generos">Lista de géneros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/generos/form">Nuevo género</a>
+                                <a class="nav-link active" href="/generos">Géneros</a>
                             </li>
                         </ul>
                      </div>
@@ -40,6 +37,11 @@
                 <label for="criterio">Buscar por:</label>
                 <input type="text" th:value="${criterio}" id="criterio" name="criterio">
                 <input type="submit" value="Buscar">
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                <a href="/generos/form">Nuevo Genero</a>
+                <div>
+                    
+                </div>
             </form>
             <br>
             <table class="table table-dark table-striped">
@@ -64,7 +66,7 @@
                         </td>
                     </tr>
                     <tr th:if="${#lists.isEmpty(generos)}">
-                        <td colspan="4">No se encontraron registros</td>
+                        <td colspan="5">No se encontraron registros</td>
                     </tr>
                 </tbody>
             </table> 
