@@ -38,4 +38,8 @@ public class CancionService {
             return true;
         }
     }
+    
+    public void eliminarCancion(Cancion g) {
+        cancionRepo.delete(g);
+    }
 }
