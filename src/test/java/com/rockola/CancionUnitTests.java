@@ -87,11 +87,18 @@ public class CancionUnitTests {
         Assertions.assertNotNull(c, "No se cargó la canción");
     }
     
-//    @Test
-//    void verificarSiSeCargaUnaCancionExistentePorCriterio() {
-//        List<Cancion> lista = cancionService.cargarCancionesPorCriterio("la muralla verde");
-//        Assertions.assertTrue(lista.size() > 0, "No se cargaron las canciones existentes");
-//    }
+    @Test
+    @Disabled
+    void verificarSiSeCargaCancionesPorCriterio() {
+        List<Cancion> cancionesPorNombre = cancionService.cargarCancionesPorCriterio("amor");
+        Assertions.assertTrue(cancionesPorNombre.size() > 0, "Error al cargar canciones por nombre");
+        List<Cancion> cancionesPorGenero = cancionService.cargarCancionesPorCriterio("vallenato");
+        Assertions.assertTrue(cancionesPorGenero.size() > 0, "Error al cargar canciones por nombre");
+        List<Cancion> cancionesPorInterprete = cancionService.cargarCancionesPorCriterio("Binomio");
+        Assertions.assertTrue(cancionesPorInterprete.size() > 0, "Error al cargar canciones por nombre");
+        List<Cancion> cancionesPorCompositor = cancionService.cargarCancionesPorCriterio("Ivan");
+        Assertions.assertTrue(cancionesPorCompositor.size() > 0, "Error al cargar canciones por nombre");
+    }
     
     @Test
     @Disabled

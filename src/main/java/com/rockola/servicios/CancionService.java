@@ -17,7 +17,7 @@ public class CancionService {
     }
     
     public List<Cancion> cargarCancionesPorCriterio(String criterio){
-        return cancionRepo.findByNombreContainingOrCompositorContainingOrInterpreteContaining(criterio, criterio, criterio);
+        return cancionRepo.findByNombreContainingOrGeneroNombreContainingOrCompositorNombreContainingOrInterpreteNombreContaining(criterio, criterio, criterio, criterio);
     }
     
     public Cancion cargarCancion(int id){
@@ -37,5 +37,9 @@ public class CancionService {
             cancionRepo.delete(c);
             return true;
         }
+    }
+    
+    public void eliminarCancion(Cancion g) {
+        cancionRepo.delete(g);
     }
 }
