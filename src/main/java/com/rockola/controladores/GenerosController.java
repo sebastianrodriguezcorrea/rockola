@@ -24,7 +24,7 @@ public class GenerosController {
     private GeneroService generoService;
 
     @GetMapping("/")
-    public String cargarIndex() {
+    public String cargarInicio() {
         return "inicio";
     }
     
